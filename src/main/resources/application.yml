@@ -1,11 +1,13 @@
 spring:
   application:
     name: smartcity-backend
+
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:smartcity_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: admin
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:admin}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,7 +17,7 @@ spring:
         format_sql: true
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -31,7 +33,7 @@ server:
   port: 8081
 
 jwt:
-  secret: "MyUltraStrongAndSecureJWTSecretKeyForSmartCityBackend2025!!"
+  secret: ${JWT_SECRET:MyUltraStrongAndSecureJWTSecretKeyForSmartCityBackend2025!!}
   expirationMs: 3600000
 
 cors:
